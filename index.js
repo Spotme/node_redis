@@ -797,6 +797,10 @@ RedisClient.prototype.send_command = function (command, args, callback) {
         }
     }
 
+    if (typeof args[args.length - 1] === 'function') {
+       args.pop();
+    }
+
     command_obj = new Command(command, args, false, buffer_args, callback);
 
     if ((!this.ready && !this.send_anyway) || !stream.writable) {
